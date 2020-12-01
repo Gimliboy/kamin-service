@@ -1,27 +1,41 @@
 <template>
-  <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="main">
+    <div class="sound-list">
+      <div class="sound-item" v-for="file in soundFiles" v-bind:key="file">
+        <kamin-sound v-bind:fileName="file" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import KaminSound from "./components/KaminSound.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: "App",
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  components: {
+    KaminSound,
+  },
+  mounted() {
+    this.soundFiles = ["testVideo2.mp3", "testVideo.mp3"];
+  },
+  data: () => ({
+    soundFiles: [],
+  }),
+};
+</script>
+<style scoped>
+#main {
+  background-image: url("./assets/kaminFeuer.jpg");
+  height: 100vh;
+}
+.sound-item {
+  padding: 1.5rem;
+}
+.sound-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>
