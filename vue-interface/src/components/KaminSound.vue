@@ -4,13 +4,14 @@
       <v-card-text class="heading"
         ><h1>Playing {{ fileName }}</h1>
         <v-progress-circular
-        v-show="this.playing"
+          v-show="this.playing"
           :rotate="-90"
           :size="70"
           :value="this.percentFinished"
           :width="10"
-        >{{Math.round(this.audio.currentTime)}} s</v-progress-circular
-      ></v-card-text>
+          >{{ Math.round(this.audio.currentTime) }} s</v-progress-circular
+        ></v-card-text
+      >
       <v-card-actions class="btn-bar">
         <v-icon large v-on:click="pause()">mdi-pause</v-icon>
         <v-icon v-bind:disabled="playing" large v-on:click="play()"
@@ -35,7 +36,7 @@ export default {
       playing: Boolean,
       finished: Boolean,
       percentFinished: Number,
-      oldVolume: Number
+      oldVolume: Number,
     };
   },
   mounted() {
@@ -49,16 +50,16 @@ export default {
       this.audio.volume = 0.5;
       this.playing = true;
       let i = 0;
-      setInterval(
-        () =>{
-          this.percentFinished = (this.audio.currentTime / this.audio.duration) * i
-          i++
-        }, 2000)
+      setInterval(() => {
+        this.percentFinished =
+          (this.audio.currentTime / this.audio.duration) * i;
+        i++;
+      }, 2000);
     },
     pause() {
       this.audio.pause();
       this.playing = false;
-      console.log(this.audio.duration)
+      console.log(this.audio.duration);
     },
     lowerVolume() {
       if (this.audio.volume - 0.1 >= 0) {
@@ -70,12 +71,11 @@ export default {
         this.audio.volume += 0.1;
       }
     },
-    muteVolume(){
-      if (this.audio.volume > 0){
+    muteVolume() {
+      if (this.audio.volume > 0) {
         this.oldVolume = this.audio.volume;
         this.audio.volume = 0;
-
-      } else{
+      } else {
         this.audio.volume = this.oldVolume;
       }
     },
@@ -92,7 +92,7 @@ export default {
   flex-direction: row;
   justify-content: space-evenly;
 }
-.heading{
+.heading {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

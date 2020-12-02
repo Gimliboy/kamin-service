@@ -36,6 +36,6 @@ export default {
 .sound-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 </style>
