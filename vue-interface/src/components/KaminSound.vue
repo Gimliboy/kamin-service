@@ -39,10 +39,7 @@ export default {
       finished: Boolean,
       percentFinished: Number,
       oldVolume: Number,
-<<<<<<< HEAD
       player: omx
-=======
->>>>>>> 48721a0ae189fa8abd5afb34e4d0e565f0acb26b
     };
   },
   mounted() {
@@ -56,7 +53,6 @@ export default {
       /*this.audio.play();
       this.audio.volume = 0.5;*/
       this.playing = true;
-<<<<<<< HEAD
       this.player.play();
       /*let i = 0;
       setInterval(
@@ -64,24 +60,12 @@ export default {
           this.percentFinished = (this.audio.currentTime / this.audio.duration) * i
           i++
         }, 2000)*/
-=======
-      let i = 0;
-      setInterval(() => {
-        this.percentFinished =
-          (this.audio.currentTime / this.audio.duration) * i;
-        i++;
-      }, 2000);
->>>>>>> 48721a0ae189fa8abd5afb34e4d0e565f0acb26b
     },
     pause() {
       // this.audio.pause();
       this.playing = false;
-<<<<<<< HEAD
       // console.log(this.audio.duration)
       this.player.pause();
-=======
-      console.log(this.audio.duration);
->>>>>>> 48721a0ae189fa8abd5afb34e4d0e565f0acb26b
     },
     lowerVolume() {
       /*if (this.audio.volume - 0.1 >= 0) {
