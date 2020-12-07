@@ -25,6 +25,8 @@
 </template>
 
 <script>
+var omx = require('node-omxplayer')
+
 export default {
   name: "KaminSound",
   props: { fileName: String },
@@ -35,40 +37,46 @@ export default {
       playing: Boolean,
       finished: Boolean,
       percentFinished: Number,
-      oldVolume: Number
+      oldVolume: Number,
+      player: omx
     };
   },
   mounted() {
-    this.audio = new Audio(require("../assets/audio/" + this.fileName));
+    /*this.audio = new Audio(require("../assets/audio/" + this.fileName));
     this.playing = false;
-    console.log(this.audio);
+    console.log(this.audio);*/
+    this.player = omx('../assets/audio/' + this.fileName)
   },
   methods: {
     play() {
-      this.audio.play();
-      this.audio.volume = 0.5;
+      /*this.audio.play();
+      this.audio.volume = 0.5;*/
       this.playing = true;
-      let i = 0;
+      this.player.play();
+      /*let i = 0;
       setInterval(
         () =>{
           this.percentFinished = (this.audio.currentTime / this.audio.duration) * i
           i++
-        }, 2000)
+        }, 2000)*/
     },
     pause() {
-      this.audio.pause();
+      // this.audio.pause();
       this.playing = false;
-      console.log(this.audio.duration)
+      // console.log(this.audio.duration)
+      this.player.pause();
     },
     lowerVolume() {
-      if (this.audio.volume - 0.1 >= 0) {
+      /*if (this.audio.volume - 0.1 >= 0) {
         this.audio.volume -= 0.1;
-      }
+      }*/
+      this.player.volDown();
     },
     higherVolume() {
-      if (this.audio.volume + 0.1 <= 1) {
+      /*if (this.audio.volume + 0.1 <= 1) {
         this.audio.volume += 0.1;
-      }
+      }*/
+      this.player.volUp();
     },
     muteVolume(){
       if (this.audio.volume > 0){
