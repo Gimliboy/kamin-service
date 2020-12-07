@@ -39,7 +39,7 @@ export default {
       finished: Boolean,
       percentFinished: Number,
       oldVolume: Number,
-      player
+      player: Omx
     };
   },
   mounted() {
