@@ -26,7 +26,7 @@
 </template>
 
 <script>
-var player = require('play-sound')()
+var player = require('play-sound')({player = "omxplayer"})
 export default {
   name: "KaminSound",
   props: { fileName: String },
