@@ -7,9 +7,9 @@
           v-show="this.playing"
           :rotate="-90"
           :size="70"
-          :value="this.percentFinished"
+          :value="0"
           :width="10"
-          >{{ Math.round(this.audio.currentTime) }} s</v-progress-circular
+          >{10  s</v-progress-circular
         ></v-card-text
       >
       <v-card-actions class="btn-bar">
@@ -39,7 +39,7 @@ export default {
       finished: Boolean,
       percentFinished: Number,
       oldVolume: Number,
-      player: omx
+      player
     };
   },
   mounted() {
