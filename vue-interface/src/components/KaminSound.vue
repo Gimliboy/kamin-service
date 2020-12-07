@@ -14,7 +14,7 @@
       >
       <v-card-actions class="btn-bar">
         <v-icon large v-on:click="pause()">mdi-pause</v-icon>
-        <v-icon v-bind:disabled="playing" large v-on:click="play()"
+        <v-icon large v-on:click="play()"
           >mdi-play</v-icon
         >
         <v-icon large v-on:click="lowerVolume()"> mdi-minus </v-icon>
