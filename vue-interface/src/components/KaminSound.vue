@@ -26,7 +26,7 @@
 </template>
 
 <script>
-var player = require('play-sound')
+var player = require('play-sound')()
 export default {
   name: "KaminSound",
   props: { fileName: String },
@@ -51,7 +51,16 @@ export default {
       /*this.audio.play();
       this.audio.volume = 0.5;*/
       this.playing = true;
-      player.play('../assets/audio/' + this.fileName, (err) => {if (err) {console.err}});
+      player.play('../assets/audio/testVideo.mp3', (err) => 
+      {
+        if (err)
+        {
+          console.log("error: " + err)
+        }
+        else{
+          console.log("hi")
+        }
+      });
       /*let i = 0;
       setInterval(
         () =>{
@@ -61,7 +70,7 @@ export default {
     },
     pause() {
       // this.audio.pause();
-      //this.playing = false;
+      this.playing = false;
       // console.log(this.audio.duration)
       //this.player.pause();
     },
@@ -86,7 +95,7 @@ export default {
       }*/
     },
     computeRate() {
-      return this.audio.currentTime / 100;
+      //return this.audio.currentTime / 100;
     },
   },
 };
