@@ -26,7 +26,6 @@
 </template>
 
 <script>
-var player = require('play-sound')()
 var fs = require('fs');
 var Decoder = require('minimp3')
 var Speaker = require('speaker')
