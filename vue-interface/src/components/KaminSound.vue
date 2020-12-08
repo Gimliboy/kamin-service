@@ -9,7 +9,7 @@
           :size="70"
           :value="0"
           :width="10"
-          >{10  s</v-progress-circular
+          ></v-progress-circular
         ></v-card-text
       >
       <v-card-actions class="btn-bar">
@@ -26,7 +26,10 @@
 </template>
 
 <script>
-var player = require('play-sound')({player = "omxplayer"})
+var player = require('play-sound')()
+var fs = require('fs');
+var Decoder = require('minimp3')
+var Speaker = require('speaker')
 export default {
   name: "KaminSound",
   props: { fileName: String },
@@ -51,7 +54,7 @@ export default {
       /*this.audio.play();
       this.audio.volume = 0.5;*/
       this.playing = true;
-      player.play('../assets/audio/testVideo.mp3', (err) => 
+      /*player.play('../assets/audio/testVideo.mp3', (err) => 
       {
         if (err)
         {
@@ -60,13 +63,17 @@ export default {
         else{
           console.log("hi")
         }
-      });
+      });*/
+      
       /*let i = 0;
       setInterval(
         () =>{
           this.percentFinished = (this.audio.currentTime / this.audio.duration) * i
           i++
         }, 2000)*/
+
+        var stream = fs.createReadStream('../assets/audio/testVideo.mp3');
+        stream.pipe(new Decoder()).pipe(new Speaker())
     },
     pause() {
       // this.audio.pause();
