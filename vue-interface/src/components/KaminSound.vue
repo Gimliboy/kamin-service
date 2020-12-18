@@ -9,14 +9,11 @@
           :size="70"
           :value="0"
           :width="10"
-          ></v-progress-circular
-        ></v-card-text
-      >
+        ></v-progress-circular
+      ></v-card-text>
       <v-card-actions class="btn-bar">
         <v-icon large v-on:click="pause()">mdi-pause</v-icon>
-        <v-icon large v-on:click="play()"
-          >mdi-play</v-icon
-        >
+        <v-icon large v-on:click="play()">mdi-play</v-icon>
         <v-icon large v-on:click="lowerVolume()"> mdi-minus </v-icon>
         <v-icon large v-on:click="higherVolume()"> mdi-plus </v-icon>
         <v-icon large v-on:click="muteVolume()">mdi-volume-off</v-icon>
@@ -26,9 +23,9 @@
 </template>
 
 <script>
-var fs = require('fs');
-var Decoder = require('minimp3')
-var Speaker = require('speaker')
+var fs = require("../../node_modules/fs");
+var Decoder = require("../../node_modules/minimp3");
+var Speaker = require("../../node_modules/speaker");
 export default {
   name: "KaminSound",
   props: { fileName: String },
@@ -39,7 +36,7 @@ export default {
       playing: Boolean,
       finished: Boolean,
       percentFinished: Number,
-      oldVolume: Number
+      oldVolume: Number,
     };
   },
   mounted() {
@@ -63,7 +60,7 @@ export default {
           console.log("hi")
         }
       });*/
-      
+
       /*let i = 0;
       setInterval(
         () =>{
@@ -71,8 +68,8 @@ export default {
           i++
         }, 2000)*/
 
-        var stream = fs.createReadStream('../assets/audio/testVideo.mp3');
-        stream.pipe(new Decoder()).pipe(new Speaker())
+      var stream = fs.createReadStream("../assets/audio/testVideo.mp3");
+      stream.pipe(new Decoder()).pipe(new Speaker());
     },
     pause() {
       // this.audio.pause();
