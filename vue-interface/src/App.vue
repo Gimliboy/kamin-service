@@ -1,6 +1,7 @@
 <template>
   <div id="main">
     <div class="sound-list">
+        <download-sound/>
       <div class="sound-item" v-for="file in soundFiles" v-bind:key="file">
         <kamin-sound v-bind:fileName="file" />
       </div>
@@ -10,12 +11,13 @@
 
 <script>
 import KaminSound from "./components/KaminSound.vue";
-
+import DownloadSound from "./components/DownloadSound";
 export default {
   name: "App",
 
   components: {
     KaminSound,
+    DownloadSound
   },
   mounted() {
     this.soundFiles = ["testVideo2.mp3", "testVideo.mp3"];
