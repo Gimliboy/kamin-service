@@ -1,8 +1,9 @@
-const fs = require("fs");
-const ytdl = require("ytdl-core");
-const player = require("play-sound")((opts = {}));
+import fs from "fs";
+import ytdl from "ytdl-core";
+import player from "play-sound";
 
 import Express from "express";
+
 const youtubeUrl = "https://www.youtube.com/";
 const mediaUrl = "/media/";
 const app = Express();
@@ -12,22 +13,25 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 
-app.get("/downloadSong", (req, res) => {
+app.get("/downloadSong/:url", (req, res) => {
   // download mp3 part of youtube video
-  ytdl(youtubeUrl + "watch?v=AWKzr6n0ea0", {
+  ytdl((youtubeUrl + "/watch?v=" + req.params.url).replace("/", ""), {
     filter: "audioonly",
-  }).pipe(fs.createWriteStream(mediaUrl + "kaminSound2.mp3"));
+  }).pipe(fs.createWriteStream("./media/kaminSound2.mp3"));
 });
 
-app.get("/playSong", (req, res) => {
+app.get("/playSong/:name", (req, res) => {
   // play the song
-  player.play(mediaUrl + "testVideo.mp3", (err) => {
+  player.play("./media/"+req.params.name, (err) => {
     if (err) {
       console.log("problem");
     }
   });
 });
 
-app.get("/songs", (req, res) => {});
+app.get("/songs", (req, res) => {
+  const allFiles =fs.readdirSync("./media").filter(file => file.endsWith(".mp3"))
+  console.log(allFiles)
+});
 
 app.listen(port, () => console.log("listening on http://localhost:" + port));
