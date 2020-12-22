@@ -23,9 +23,6 @@
 </template>
 
 <script>
-var fs = require("../../node_modules/fs");
-var Decoder = require("../../node_modules/minimp3");
-var Speaker = require("../../node_modules/speaker");
 export default {
   name: "KaminSound",
   props: { fileName: String },
@@ -68,8 +65,8 @@ export default {
           i++
         }, 2000)*/
 
-      var stream = fs.createReadStream("../assets/audio/testVideo.mp3");
-      stream.pipe(new Decoder()).pipe(new Speaker());
+      //var stream = this.$fs.createReadStream('../assets/audio/testVideo.mp3');
+      //stream.pipe(new this.$decoder()).pipe(new this.$speaker())
     },
     pause() {
       // this.audio.pause();
