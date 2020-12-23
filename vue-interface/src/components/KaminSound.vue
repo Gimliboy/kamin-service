@@ -103,7 +103,10 @@ export default {
       //this.player.volUp();
     },
     muteVolume() {
-      let response = fetch("http://192.168.178.90:3000/stopSong").then((response) => this.playing = false);
+        let response = fetch("http://192.168.178.90:3000/stopSong").then((response) => {
+            this.playing = false
+            console.log(response);
+        });
       console.log(response);
       /*if (this.audio.volume > 0) {
         this.oldVolume = this.audio.volume;
