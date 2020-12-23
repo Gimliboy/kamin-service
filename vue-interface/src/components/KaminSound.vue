@@ -53,7 +53,7 @@ export default {
         if (response.status == 200) {
           alert("finished playing");
         } else {
-          alert("problem with playing");
+          alert("other song already playing");
         }
       });
       console.log(response);

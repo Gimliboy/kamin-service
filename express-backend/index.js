@@ -41,8 +41,13 @@ app.get("/downloadSong/:url/:name", (req, res) => {
 });
 
 app.get("/playSong/:name", (req, res) => {
-  playProcess = spawn("omxplayer -o local ./media/" + req.params.name);
+  if(!playProcess){
+    playProcess = spawn("omxplayer -o local ./media/" + req.params.name);
   playProcess.stdin.setEncoding('utf-8')
+  res.sendStatus(200)
+  } else {
+res.sendStatus(500)
+  }
 });
 
 app.get("/higherVol", (req, res) => {
@@ -65,6 +70,7 @@ app.get("/stopSong", (req, res) =>{
   if(playProcess)
   {
     playProcess.kill();
+    playProcess = null;
   }
   console.log("stop the song")
 })
