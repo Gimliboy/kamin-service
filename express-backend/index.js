@@ -42,7 +42,7 @@ app.get("/downloadSong/:url/:name", (req, res) => {
 });
 
 app.get("/playSong/:name", (req, res) => {
-  spawn("start ", ["./media/" + req.params.name]);
+  spawn("omxplayer ", ["./media/" + req.params.name]);
   res.sendStatus(200);
 });
 
