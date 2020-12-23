@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "HOST='0.0.0.0' PORT=80 npm run dev"
   },
   "dependencies": {
     "core-js": "^3.6.5",
