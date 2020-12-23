@@ -1,6 +1,6 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
-const spawn = require("child_process");
+const {exec} = require("child_process");
 const Express = require("express");
 
 const youtubeUrl = "https://www.youtube.com/";
@@ -40,8 +40,8 @@ app.get("/downloadSong/:url/:name", (req, res) => {
 });
 
 app.get("/playSong/:name", (req, res) => {
-  spawn("omxplayer ", ["./media/" + req.params.name]);
-  res.sendStatus(200);
+  exec("omxplayer -o local ./media/" + req.params.name);
+ 
 });
 
 app.get("/songs", (req, res) => {
