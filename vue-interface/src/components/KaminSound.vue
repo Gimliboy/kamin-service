@@ -3,7 +3,7 @@
     <v-card shaped>
       <v-card-text class="heading"
         ><h1>Playing {{ fileName }}</h1>
-        <v-progress-circular
+        <v-progress-circular id="progress"
           v-show="this.playing"
           :rotate="-90"
           :size="70"
@@ -16,7 +16,6 @@
         <v-icon large v-on:click="play()">mdi-play</v-icon>
         <v-icon large v-on:click="lowerVolume()"> mdi-minus </v-icon>
         <v-icon large v-on:click="higherVolume()"> mdi-plus </v-icon>
-        <v-icon large v-on:click="muteVolume()">mdi-volume-off</v-icon>
       </v-card-actions>
     </v-card>
   </div>
@@ -86,18 +85,24 @@ export default {
       //this.player.pause();
     },
     lowerVolume() {
+      let response = fetch("http://192.168.178.90:3000/lowerVol");
+      console.log(response);
       /*if (this.audio.volume - 0.1 >= 0) {
         this.audio.volume -= 0.1;
       }*/
       //this.player.volDown();
     },
     higherVolume() {
+      let response = fetch("http://192.168.178.90:3000/higherVol");
+      console.log(response);
       /*if (this.audio.volume + 0.1 <= 1) {
         this.audio.volume += 0.1;
       }*/
       //this.player.volUp();
     },
     muteVolume() {
+      let response = fetch("http://192.168.178.90:3000/stopSong");
+      console.log(response);
       /*if (this.audio.volume > 0) {
         this.oldVolume = this.audio.volume;
         this.audio.volume = 0;
@@ -122,5 +127,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+#progress{
+  visibility: hidden;
 }
 </style>

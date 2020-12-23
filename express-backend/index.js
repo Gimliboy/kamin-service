@@ -1,8 +1,9 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
-const {exec} = require("child_process");
+const {exec, spawn} = require("child_process");
 const Express = require("express");
 
+const playProcess = null;
 const youtubeUrl = "https://www.youtube.com/";
 const mediaUrl = "/media/";
 const app = Express();
@@ -40,10 +41,33 @@ app.get("/downloadSong/:url/:name", (req, res) => {
 });
 
 app.get("/playSong/:name", (req, res) => {
-  exec("omxplayer -o local ./media/" + req.params.name);
- 
+  playProcess = spawn("omxplayer -o local ./media/" + req.params.name);
+  playProcess.stdin.setEncoding('utf-8')
 });
 
+app.get("/higherVol", (req, res) => {
+  if(playProcess)
+  {
+    playProcess.stdin.write("+ \n")
+    playProcess.stdin.end()
+  }
+  console.log("higher")
+});
+app.get("/lowerVol", (req, res) => {
+  if(playProcess)
+  {
+    playProcess.stdin.write("- \n")
+    playProcess.stdin.end()
+  }
+  console.log("lower")
+});
+app.get("/stopSong", (req, res) =>{
+  if(playProcess)
+  {
+    playProcess.kill();
+  }
+  console.log("stop the song")
+})
 app.get("/songs", (req, res) => {
   const allFiles = fs
     .readdirSync("./media")
