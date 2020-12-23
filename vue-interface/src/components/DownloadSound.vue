@@ -41,7 +41,7 @@ export default {
       console.log(this.$fs);
       try {
         let response = fetch(
-          "http://localhost:3000/downloadSong/" +
+          "http://192.168.178.90:3000/downloadSong/" +
             this.url.replace("https://www.youtube.com/watch?v=", "") +
             "/" +
             this.name

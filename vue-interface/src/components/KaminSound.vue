@@ -48,7 +48,7 @@ export default {
       this.audio.volume = 0.5;*/
       this.playing = true;
       let response = fetch(
-        "http://localhost:3000/playSong/" + this.fileName
+        "http://192.168.178.90:3000/playSong/" + this.fileName
       ).then((response) => {
         console.log(response.status);
         if (response.status == 200) {
