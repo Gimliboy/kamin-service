@@ -11,6 +11,7 @@ Vue.config.productionTip = false
 //Vue.prototype.$decoder = Decoder;
 Vue.prototype.$fs = fs;
 Vue.prototype.$ytdl = ytdl;
+Vue.prototype.$url = "http://192.168.178.90:3000";
 
 new Vue({
   vuetify,

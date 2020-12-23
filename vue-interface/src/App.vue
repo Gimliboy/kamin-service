@@ -29,7 +29,7 @@ export default {
     async getSongs() {
       try {
         console.log(this.soundFiles);
-        let response = await fetch("http://localhost:3000/songs");
+        let response = await fetch(this.$url + "/songs");
         this.soundFiles = await response.json();
         console.log(this.soundFiles);
       } catch (e) {
