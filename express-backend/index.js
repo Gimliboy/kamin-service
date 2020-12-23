@@ -1,9 +1,7 @@
-import fs, { lstat } from "fs";
-import ytdl from "ytdl-core";
-import player from "play-sound";
-import exec, { spawn } from "child_process";
-import Express from "express";
-import { stderr } from "process";
+const fs = require("fs");
+const ytdl = require("ytdl-core");
+const spawn = require("child_process");
+const Express = require("express");
 
 const youtubeUrl = "https://www.youtube.com/";
 const mediaUrl = "/media/";
