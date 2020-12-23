@@ -1,13 +1,14 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
-const { exec, spawn } = require("child_process");
+let { exec, spawn } = require("child_process");
 const Express = require("express");
 
-const playProcess = null;
+let playProcess = null;
 const youtubeUrl = "https://www.youtube.com/";
 const mediaUrl = "/media/";
 const app = Express();
 const port = 3000;
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -43,10 +44,9 @@ app.get("/downloadSong/:url/:name", (req, res) => {
 
 // play song with :name
 app.get("/playSong/:name", (req, res) => {
-  if (!playProcess) {
-    playProcess = spawn("omxplayer -o local ./media/" + req.params.name);
+  if (playProcess === null) {
+    playProcess = exec("omxplayer -o local --vol 20 ./media/" + req.params.name);
     playProcess.stdin.setEncoding("utf-8");
-    res.sendStatus(200);
   } else {
     res.sendStatus(500);
   }
@@ -55,15 +55,13 @@ app.get("/playSong/:name", (req, res) => {
 // control volume
 app.get("/higherVol", (req, res) => {
   if (playProcess) {
-    playProcess.stdin.write("+ \n");
-    playProcess.stdin.end();
+    playProcess.stdin.write("+");
   }
   console.log("higher");
 });
 app.get("/lowerVol", (req, res) => {
   if (playProcess) {
-    playProcess.stdin.write("- \n");
-    playProcess.stdin.end();
+    playProcess.stdin.write("-");
   }
   console.log("lower");
 });
@@ -71,8 +69,10 @@ app.get("/lowerVol", (req, res) => {
 // stop the song
 app.get("/stopSong", (req, res) => {
   if (playProcess) {
-    playProcess.kill();
-    playProcess = null;
+	playProcess.stdin.write("q");
+    playProcess.kill('SIGINT');
+console.log(playProcess.pid);    
+playProcess = null;
   }
   console.log("stop the song");
 });

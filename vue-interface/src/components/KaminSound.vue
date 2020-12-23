@@ -16,6 +16,7 @@
         <v-icon large v-on:click="play()">mdi-play</v-icon>
         <v-icon large v-on:click="lowerVolume()"> mdi-minus </v-icon>
         <v-icon large v-on:click="higherVolume()"> mdi-plus </v-icon>
+	<v-icon large v-on:click="muteVolume()"> mdi-stop </v-icon>
       </v-card-actions>
     </v-card>
   </div>
