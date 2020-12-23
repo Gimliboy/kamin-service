@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card shaped>
+    <v-card shaped v-bind:class="{'playing': (this.playing === true)}">
       <v-card-text class="heading"
         ><h1>Playing {{ fileName }}</h1>
         <v-progress-circular id="progress"
-          v-show="this.playing"
+          v-show="false"
           :rotate="-90"
           :size="70"
           :value="0"
@@ -46,14 +46,13 @@ export default {
     play() {
       /*this.audio.play();
       this.audio.volume = 0.5;*/
-      this.playing = true;
       let response = fetch(
         "http://192.168.178.90:3000/playSong/" + this.fileName
       ).then((response) => {
         console.log(response.status);
         if (response.status == 200) {
-          alert("finished playing");
-        } else {
+                this.playing = true;
+} else {
           alert("other song already playing");
         }
       });
@@ -82,6 +81,8 @@ export default {
     pause() {
       // this.audio.pause();
       this.playing = false;
+      let response = fetch("http://192.168.178.90:3000/pause");
+      console.log(response);
       // console.log(this.audio.duration)
       //this.player.pause();
     },
@@ -102,7 +103,7 @@ export default {
       //this.player.volUp();
     },
     muteVolume() {
-      let response = fetch("http://192.168.178.90:3000/stopSong");
+      let response = fetch("http://192.168.178.90:3000/stopSong").then((response) => this.playing = false);
       console.log(response);
       /*if (this.audio.volume > 0) {
         this.oldVolume = this.audio.volume;
@@ -131,5 +132,8 @@ export default {
 }
 #progress{
   visibility: hidden;
+}
+.playing{
+  border: burlywood;
 }
 </style>

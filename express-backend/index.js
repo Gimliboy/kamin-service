@@ -52,6 +52,14 @@ app.get("/playSong/:name", (req, res) => {
   }
 });
 
+app.get("/pause", (req, res) => {
+  if (playProcess !== null) {
+    playProcess.stdin.write("p")
+  } else {
+    res.sendStatus(500);
+  }
+});
+
 // control volume
 app.get("/higherVol", (req, res) => {
   if (playProcess) {
