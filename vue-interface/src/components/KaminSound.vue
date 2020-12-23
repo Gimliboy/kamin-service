@@ -80,9 +80,9 @@ export default {
     },
     pause() {
       // this.audio.pause();
-      this.playing = false;
-      let response = fetch("http://192.168.178.90:3000/pause");
-      console.log(response);
+      //this.playing = false;
+      //let response = fetch("http://192.168.178.90:3000/pause");
+      //console.log(response);
       // console.log(this.audio.duration)
       //this.player.pause();
     },
@@ -137,6 +137,7 @@ export default {
   visibility: hidden;
 }
 .playing{
+  border-radius: 1rem;
   border: burlywood;
 }
 </style>
