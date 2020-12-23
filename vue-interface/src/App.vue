@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <div class="sound-list">
-        <download-sound/>
+      <download-sound v-on:update="getSongs" />
       <div class="sound-item" v-for="file in soundFiles" v-bind:key="file">
         <kamin-sound v-bind:fileName="file" />
       </div>
@@ -17,14 +17,27 @@ export default {
 
   components: {
     KaminSound,
-    DownloadSound
+    DownloadSound,
   },
   mounted() {
-    this.soundFiles = ["testVideo2.mp3", "testVideo.mp3"];
+    this.getSongs();
   },
   data: () => ({
     soundFiles: [],
   }),
+  methods: {
+    async getSongs() {
+      try {
+        console.log(this.soundFiles);
+        let response = await fetch("http://localhost:3000/songs");
+        this.soundFiles = await response.json();
+        console.log(this.soundFiles);
+      } catch (e) {
+        console.log("no connection");
+        this.soundFiles = [];
+      }
+    },
+  },
 };
 </script>
 <style scoped>

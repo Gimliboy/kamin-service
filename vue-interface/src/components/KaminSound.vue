@@ -47,6 +47,17 @@ export default {
       /*this.audio.play();
       this.audio.volume = 0.5;*/
       this.playing = true;
+      let response = fetch(
+        "http://localhost:3000/playSong/" + this.fileName
+      ).then((response) => {
+        console.log(response.status);
+        if (response.status == 200) {
+          alert("finished playing");
+        } else {
+          alert("problem with playing");
+        }
+      });
+      console.log(response);
       /*player.play('../assets/audio/testVideo.mp3', (err) => 
       {
         if (err)
