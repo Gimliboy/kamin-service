@@ -1,6 +1,6 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
-const {exec, spawn} = require("child_process");
+const { exec, spawn } = require("child_process");
 const Express = require("express");
 
 const playProcess = null;
@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 
+// download song with :url and store it under :name
 app.get("/downloadSong/:url/:name", (req, res) => {
   console.log("downloading....");
   // download mp3 part of youtube video
@@ -40,40 +41,43 @@ app.get("/downloadSong/:url/:name", (req, res) => {
   }
 });
 
+// play song with :name
 app.get("/playSong/:name", (req, res) => {
-  if(!playProcess){
+  if (!playProcess) {
     playProcess = spawn("omxplayer -o local ./media/" + req.params.name);
-  playProcess.stdin.setEncoding('utf-8')
-  res.sendStatus(200)
+    playProcess.stdin.setEncoding("utf-8");
+    res.sendStatus(200);
   } else {
-res.sendStatus(500)
+    res.sendStatus(500);
   }
 });
 
+// control volume
 app.get("/higherVol", (req, res) => {
-  if(playProcess)
-  {
-    playProcess.stdin.write("+ \n")
-    playProcess.stdin.end()
+  if (playProcess) {
+    playProcess.stdin.write("+ \n");
+    playProcess.stdin.end();
   }
-  console.log("higher")
+  console.log("higher");
 });
 app.get("/lowerVol", (req, res) => {
-  if(playProcess)
-  {
-    playProcess.stdin.write("- \n")
-    playProcess.stdin.end()
+  if (playProcess) {
+    playProcess.stdin.write("- \n");
+    playProcess.stdin.end();
   }
-  console.log("lower")
+  console.log("lower");
 });
-app.get("/stopSong", (req, res) =>{
-  if(playProcess)
-  {
+
+// stop the song
+app.get("/stopSong", (req, res) => {
+  if (playProcess) {
     playProcess.kill();
     playProcess = null;
   }
-  console.log("stop the song")
-})
+  console.log("stop the song");
+});
+
+// get all songs
 app.get("/songs", (req, res) => {
   const allFiles = fs
     .readdirSync("./media")
